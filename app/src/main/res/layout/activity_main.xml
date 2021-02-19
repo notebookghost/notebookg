@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <ImageView
+        android:scaleX="1"
+        android:scaleY="1"
+        android:id="@+id/logoimageview"
+        android:layout_width="180dp"
+        android:layout_height="131dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bycontinuingyouagreetextview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.037"
+        app:srcCompat="@drawable/logoo" />
+
+    <TextView
+        android:id="@+id/lendascreentext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LEND A SCREEN"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.258" />
+
+    <TextView
+        android:id="@+id/onlinestreamingmadeaffordabletext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Online streaming made affordable"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.547"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.339" />
+
+    <ImageView
+        android:id="@+id/peopleimageview"
+        android:layout_width="327dp"
+        android:layout_height="167dp"
+        app:layout_constraintBottom_toTopOf="@+id/continuewithphonenumberbtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/onlinestreamingmadeaffordabletext"
+        app:srcCompat="@drawable/peoplee" />
+
+
+    <Button
+        android:id="@+id/continuewithphonenumberbtn"
+        android:layout_width="360dp"
+        android:layout_height="62dp"
+        android:text="CONTINUE WITH PHONE NUMBER"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.832" />
+
+    <TextView
+        android:id="@+id/bycontinuingyouagreetextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleX="1"
+        android:scaleY="1"
+        android:text="By continuing you agree to our Terms and Condition"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/continuewithphonenumberbtn"
+        app:layout_constraintVertical_bias="0.215" />
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
