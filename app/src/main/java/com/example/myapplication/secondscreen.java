@@ -30,8 +30,8 @@ import java.util.concurrent.TimeUnit;
          super.onCreate(savedInstanceState);
          setContentView(R.layout.activity_secondscreen);
          e1 = (EditText) findViewById(R.id.Phonenumberbox);
-         e2 = (EditText) findViewById(R.id.enterverificationtextview)
-         auth = FirebaseAuth.getInstance()
+         e2 = (EditText) findViewById(R.id.verifytextview);
+         auth = FirebaseAuth.getInstance();
 
          mCallback = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
              @Override
@@ -50,7 +50,7 @@ import java.util.concurrent.TimeUnit;
                  verification_code = s;
                  Toast.makeText(getApplicationContext(),"Code sent to the number",Toast.LENGTH_SHORT).show();
              }
-         }
+         };
 
      }
 
@@ -68,27 +68,23 @@ import java.util.concurrent.TimeUnit;
                          @Override
                          public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful())
-                                (
+                            {
                                         Toast.makeText(getApplicationContext(),"User signed in successfully",Toast.LENGTH_SHORT).show();
-                                        )
+                         }
                          }
                      });
          }
 
-         public void verify(View v)
-         (
+         public void verify(View v) {
              String input_code = e2.getText().toString();
-             if(verification_code.equals(""))
-             (
-                 verifyPhoneNumber(verification_code,input_code);
-             )
-
-
-                 )
-              public void verifyPhoneNumber(String verifyCode,String input_code)
-              (
-                 PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verifyCode,input_code);
-                 signinWithPhone(credential);
-             )
+             if (verification_code.equals(""))
+             {
+                verifyPhoneNumber(verification_code, input_code);
+             }
+         }
+              public void verifyPhoneNumber(String verifyCode,String input_code) {
+                  PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verifyCode, input_code);
+                  signInWithPhone(credential);
+              }
 
 }
