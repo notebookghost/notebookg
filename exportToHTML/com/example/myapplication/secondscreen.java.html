@@ -1,0 +1,112 @@
+<html>
+<head>
+<title>secondscreen.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000000;}
+.s1 { color: #000080; font-weight: bold;}
+.s2 { color: #008000; font-weight: bold;}
+.s3 { color: #0000ff;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+secondscreen.java</font>
+</center></td></tr></table>
+<pre> <span class="s1">package </span>com.example.myapplication;
+
+<span class="s1">import </span>androidx.annotation.NonNull;
+<span class="s1">import </span>androidx.appcompat.app.AppCompatActivity;
+
+<span class="s1">import </span>android.os.Bundle;
+<span class="s1">import </span>android.view.View;
+<span class="s1">import </span>android.widget.EditText;
+<span class="s1">import </span>android.widget.Toast;
+
+<span class="s1">import </span>com.google.android.gms.tasks.OnCompleteListener;
+<span class="s1">import </span>com.google.android.gms.tasks.Task;
+<span class="s1">import </span>com.google.firebase.FirebaseException;
+<span class="s1">import </span>com.google.firebase.auth.AuthResult;
+<span class="s1">import </span>com.google.firebase.auth.FirebaseAuth;
+<span class="s1">import </span>com.google.firebase.auth.PhoneAuthCredential;
+<span class="s1">import </span>com.google.firebase.auth.PhoneAuthProvider;
+
+<span class="s1">import </span>java.util.concurrent.TimeUnit;
+
+ <span class="s1">public class </span>secondscreen <span class="s1">extends </span>AppCompatActivity {
+
+     FirebaseAuth auth;
+     EditText e1, e2;
+     PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallback;
+     String verification_code;
+
+     @Override
+     <span class="s1">protected void </span>onCreate(Bundle savedInstanceState) {
+         <span class="s1">super</span>.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_secondscreen);
+         e1 = (EditText) findViewById(R.id.Phonenumberbox);
+         e2 = (EditText) findViewById(R.id.enterverificationtextview);
+         auth = FirebaseAuth.getInstance();
+
+         mCallback = <span class="s1">new </span>PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+             @Override
+             <span class="s1">public void </span>onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
+
+             }
+
+             @Override
+             <span class="s1">public void </span>onVerificationFailed(FirebaseException e) {
+
+             }
+
+             @Override
+             <span class="s1">public void </span>onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                 <span class="s1">super</span>.onCodeSent(s, forceResendingToken);
+                 verification_code = s;
+                 Toast.makeText(getApplicationContext(),<span class="s2">&quot;Code sent to the number&quot;</span>,Toast.LENGTH_SHORT).show();
+             }
+         };
+
+     }
+
+     <span class="s1">public void </span>send_sms(View v)
+     {
+         String number = e1.getText() .toString();
+         PhoneAuthProvider.getInstance() . verifyPhoneNumber(
+                 number,<span class="s3">60</span>, TimeUnit.SECONDS,<span class="s1">this</span>,mCallback
+                 );
+ }
+         <span class="s1">public void </span>signInWithPhone(PhoneAuthCredential credential)
+         {
+             auth.signInWithCredential(credential)
+                     .addOnCompleteListener(<span class="s1">new </span>OnCompleteListener&lt;AuthResult&gt;() {
+                         @Override
+                         <span class="s1">public void </span>onComplete(@NonNull Task&lt;AuthResult&gt; task) {
+                            <span class="s1">if</span>(task.isSuccessful()) {
+                                Toast.makeText(getApplicationContext(), <span class="s2">&quot;User signed in successfully&quot;</span>, Toast.LENGTH_SHORT).show();
+                            }
+                         }
+                     });
+         }
+
+         <span class="s1">public void </span>verify(View v)
+         {
+             String input_code = e2.getText().toString();
+             <span class="s1">if</span>(verification_code.equals(<span class="s2">&quot;&quot;</span>))
+             {
+                 verifyPhoneNumber(verification_code,input_code);
+             }
+
+
+         }
+              <span class="s1">public void </span>verifyPhoneNumber(String verifyCode,String input_code)
+              {
+                 PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verifyCode,input_code);
+                 signinWithPhone(credential);
+              }
+
+}</pre>
+</body>
+</html>
